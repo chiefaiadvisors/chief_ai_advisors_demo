@@ -277,18 +277,15 @@ def animate_finger_guns(gun_frames, delay=1.1):
         time.sleep(delay)
 
 def print_duo_and_robot(guy_pose, gal_pose, robot_frame):
-    """Guy + Gal (left) side-by-side with robot (right), feet aligned."""
+    """Guy (left) | Robot (middle) | Gal (right), feet aligned."""
     guy_lines = guy_pose.split("\n")
     gal_lines = gal_pose.split("\n")
-    # Combine duo into one column
-    h = max(len(guy_lines), len(gal_lines))
-    while len(guy_lines) < h: guy_lines.insert(0, "")
-    while len(gal_lines) < h: gal_lines.insert(0, "")
-    duo_lines = [f"{a:<10}{b}" for a, b in zip(guy_lines, gal_lines)]
-    while len(duo_lines) < len(robot_frame): duo_lines.insert(0, "")
-    duo_col = 26
-    for d, r in zip(duo_lines, robot_frame):
-        print(f"  {d:<{duo_col}}{r}")
+    h = max(len(guy_lines), len(gal_lines), len(robot_frame))
+    while len(guy_lines)   < h: guy_lines.insert(0, "")
+    while len(gal_lines)   < h: gal_lines.insert(0, "")
+    while len(robot_frame) < h: robot_frame.insert(0, "")
+    for g, r, gl in zip(guy_lines, robot_frame, gal_lines):
+        print(f"  {g:<14}{r:<22}{gl}")
 
 # ----------------------
 # ASCII Computer (services section)
