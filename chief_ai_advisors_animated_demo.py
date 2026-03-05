@@ -11,7 +11,7 @@ import time
 import os
 
 # ----------------------
-# Guy Poses — WITH glasses
+# Guy Poses — WITH glasses (short hair)
 # ----------------------
 GUY_LEFT  = "   (⌐■_■)\n   <)   )╯\n   /    \\"
 GUY_RIGHT = "   (⌐■_■)\n    /)  )>\n   /    \\"
@@ -23,11 +23,34 @@ GUY_POINT_UP_LEFT  = "    \\ (⌐■_■)\n     \\)   )╯\n      /    \\"
 GUY_POINT_UP_RIGHT = "   (⌐■_■) /\n   <)   )/ \n   /    \\  "
 
 # ----------------------
+# Gal Poses — WITH glasses (long hair ~)
+# ----------------------
+GAL_LEFT  = "  ~(⌐■_■)\n   <)   )╯\n   /    \\"
+GAL_RIGHT = "  ~(⌐■_■)\n    /)  )>\n   /    \\"
+GAL_ARMS  = "  ~(⌐■_■)\n   \\(   )/\n   /    \\"
+GAL_CHEER = " ~\\(⌐■_■)/\n   |     |\n   /    \\"
+
+GAL_POINT_UP_LEFT  = "   \\ ~(⌐■_■)\n    \\)   )╯\n     /    \\"
+GAL_POINT_UP_RIGHT = "  ~(⌐■_■) /\n   <)   )/ \n   /    \\  "
+
+# ----------------------
 # Guy Poses — WITHOUT glasses (SEO section sidekicks)
 # ----------------------
 NOGLASS_LEFT  = "   (•_•)\n   <)   )╯\n   /    \\"
 NOGLASS_RIGHT = "   (•_•)\n    /)  )>\n   /    \\"
 NOGLASS_ARMS  = "   (•_•)\n   \\(   )/\n   /    \\"
+
+# ----------------------
+# Helper: print two guys side by side (guy left, gal right)
+# ----------------------
+def print_duo(guy_pose, gal_pose):
+    gl = guy_pose.split("\n")
+    gr = gal_pose.split("\n")
+    h = max(len(gl), len(gr))
+    while len(gl) < h: gl.insert(0, "")
+    while len(gr) < h: gr.insert(0, "")
+    for a, b in zip(gl, gr):
+        print(f"  {a:<16}{b}")
 
 # ----------------------
 # ASCII Phone (contact slide)
@@ -63,25 +86,25 @@ def print_three_guys(pose_left, pose_mid, pose_right):
 # ----------------------
 build_frames = [
 r"""
-   (•_•)
-   |    |
-   /    \
+   (•_•)    ~(•_•)
+   |    |    |    |
+   /    \    /    \
 """,
 r"""
-   (•_•)
-   <)   )╯
-   /    \
+   (•_•)    ~(•_•)
+   <)   )╯   /)  )>
+   /    \    /    \
 """,
 r"""
-   (•_•)
-  ⌐■-■)
-   <)   )╯
-   /    \
+   (•_•)    ~(•_•)
+  ⌐■-■)    ⌐■-■)
+   <)   )╯   /)  )>
+   /    \    /    \
 """,
 r"""
-   (⌐■_■)
-   <)   )╯
-   /    \
+   (⌐■_■)  ~(⌐■_■)
+   <)   )╯   /)  )>
+   /    \    /    \
 
    Ready for AI workflow!
 """,
@@ -91,12 +114,12 @@ r"""
 # Intro Finger Gun Frames
 # ----------------------
 finger_gun_messages = [
-    ("🚀 Launching AI solutions...",      GUY_LEFT),
-    ("📊 Data Analytics & Insights",       GUY_RIGHT),
-    ("⚖  Compliance & Reporting",          GUY_LEFT),
-    ("🌐 SEO & AEO Optimization",          GUY_RIGHT),
-    ("🤖 Custom AI Tools & Automation",    GUY_LEFT),
-    ("✅ Chief AI Advisors at work!",       GUY_ARMS),
+    ("🚀 Launching AI solutions...",      GUY_LEFT,  GAL_RIGHT),
+    ("📊 Data Analytics & Insights",       GAL_LEFT,  GUY_RIGHT),
+    ("⚖  Compliance & Reporting",          GUY_LEFT,  GAL_RIGHT),
+    ("🌐 SEO & AEO Optimization",          GAL_LEFT,  GUY_RIGHT),
+    ("🤖 Custom AI Tools & Automation",    GUY_LEFT,  GAL_RIGHT),
+    ("✅ Chief AI Advisors at work!",       GUY_ARMS,  GAL_ARMS),
 ]
 
 # ----------------------
@@ -181,19 +204,19 @@ seo_highlights = [
 # Workflow Steps
 # ----------------------
 workflow_steps = [
-    ("Receive client data",                                    "📥", GUY_LEFT),
-    ("Validate data completeness",                             "🔎", GUY_RIGHT),
-    ("Log into CRM",                                           "💻", GUY_LEFT),
-    ("Upload documents",                                       "📂", GUY_RIGHT),
-    ("Run automated quality checks",                           "⚙️ ", GUY_LEFT),
-    ("Audit website SEO & AEO performance",                    "🔍", GUY_RIGHT),
-    ("Optimize content for search & AI answer engines",        "✍️ ", GUY_LEFT),
-    ("Implement keyword strategy to boost organic traffic",    "📈", GUY_RIGHT),
-    ("Deploy structured data markup for AEO visibility",       "🏗️ ", GUY_LEFT),
-    ("Track traffic growth & generate performance report",     "📊", GUY_RIGHT),
-    ("Notify team of completion",                              "🔔", GUY_LEFT),
-    ("Archive workflow log",                                   "🗄️ ", GUY_RIGHT),
-    ("Send final report to stakeholders",                      "📧", GUY_CHEER),
+    ("Receive client data",                                    "📥", GUY_LEFT,  GAL_RIGHT),
+    ("Validate data completeness",                             "🔎", GAL_LEFT,  GUY_RIGHT),
+    ("Log into CRM",                                           "💻", GUY_LEFT,  GAL_RIGHT),
+    ("Upload documents",                                       "📂", GAL_LEFT,  GUY_RIGHT),
+    ("Run automated quality checks",                           "⚙️ ", GUY_LEFT,  GAL_RIGHT),
+    ("Audit website SEO & AEO performance",                    "🔍", GAL_LEFT,  GUY_RIGHT),
+    ("Optimize content for search & AI answer engines",        "✍️ ", GUY_LEFT,  GAL_RIGHT),
+    ("Implement keyword strategy to boost organic traffic",    "📈", GAL_LEFT,  GUY_RIGHT),
+    ("Deploy structured data markup for AEO visibility",       "🏗️ ", GUY_LEFT,  GAL_RIGHT),
+    ("Track traffic growth & generate performance report",     "📊", GAL_LEFT,  GUY_RIGHT),
+    ("Notify team of completion",                              "🔔", GUY_LEFT,  GAL_RIGHT),
+    ("Archive workflow log",                                   "🗄️ ", GAL_LEFT,  GUY_RIGHT),
+    ("Send final report to stakeholders",                      "📧", GUY_CHEER, GAL_CHEER),
 ]
 
 # ----------------------
@@ -246,21 +269,26 @@ def animate_build(frames, delay=0.75):
         time.sleep(delay)
 
 def animate_finger_guns(gun_frames, delay=1.1):
-    for message, pose in gun_frames:
+    for message, pose_a, pose_b in gun_frames:
         clear()
         print()
-        print_guy(pose)
+        print_duo(pose_a, pose_b)
         print(f"\n   {message}")
         time.sleep(delay)
 
-def print_guy_and_robot(guy_pose, robot_frame):
-    """Guy (left) side-by-side with robot (right), feet aligned."""
+def print_duo_and_robot(guy_pose, gal_pose, robot_frame):
+    """Guy + Gal (left) side-by-side with robot (right), feet aligned."""
     guy_lines = guy_pose.split("\n")
-    while len(guy_lines) < len(robot_frame):
-        guy_lines.insert(0, "")
-    guy_col = 18
-    for g, r in zip(guy_lines, robot_frame):
-        print(f"  {g:<{guy_col}}{r}")
+    gal_lines = gal_pose.split("\n")
+    # Combine duo into one column
+    h = max(len(guy_lines), len(gal_lines))
+    while len(guy_lines) < h: guy_lines.insert(0, "")
+    while len(gal_lines) < h: gal_lines.insert(0, "")
+    duo_lines = [f"{a:<10}{b}" for a, b in zip(guy_lines, gal_lines)]
+    while len(duo_lines) < len(robot_frame): duo_lines.insert(0, "")
+    duo_col = 26
+    for d, r in zip(duo_lines, robot_frame):
+        print(f"  {d:<{duo_col}}{r}")
 
 # ----------------------
 # ASCII Computer (services section)
@@ -278,7 +306,7 @@ COMPUTER = [
     r"   ~~~~~~~~~~~~~~~~~ ",
 ]
 
-def render_services_scene(printed_services, guy_pose, position="left"):
+def render_services_scene(printed_services, guy_pose, gal_pose, position="left"):
     STAGE_WIDTH = 58
     comp_col_width = 22
     print("\n" + "="*STAGE_WIDTH)
@@ -292,11 +320,15 @@ def render_services_scene(printed_services, guy_pose, position="left"):
         print(f"  {c:<{comp_col_width}}  {r}")
     print()
     guy_lines = guy_pose.split("\n")
+    gal_lines = gal_pose.split("\n")
+    h = max(len(guy_lines), len(gal_lines))
+    while len(guy_lines) < h: guy_lines.insert(0, "")
+    while len(gal_lines) < h: gal_lines.insert(0, "")
     indent_left  = " " * 2
-    indent_right = " " * (comp_col_width + 6)
+    indent_right = " " * (comp_col_width - 8)
     indent = indent_right if position == "right" else indent_left
-    for line in guy_lines:
-        print(indent + line)
+    for a, b in zip(guy_lines, gal_lines):
+        print(indent + f"{a:<14}{b}")
 
 # ----------------------
 # Services Screen
@@ -307,16 +339,17 @@ def display_services():
 
     for i, (icon, service, _) in enumerate(services):
         pos = positions[i]
-        pose = GUY_POINT_UP_RIGHT if pos == "right" else GUY_POINT_UP_LEFT
+        guy_pose = GUY_POINT_UP_RIGHT if pos == "right" else GUY_POINT_UP_LEFT
+        gal_pose = GAL_POINT_UP_LEFT  if pos == "right" else GAL_POINT_UP_RIGHT
         midpos = "left" if pos == "right" else "right"
-        for walk_pos, walk_pose in [(midpos, GUY_ARMS), (pos, pose)]:
+        for walk_pos in [midpos, pos]:
             clear()
-            render_services_scene(printed, walk_pose, position=walk_pos)
+            render_services_scene(printed, GUY_ARMS, GAL_ARMS, position=walk_pos)
             time.sleep(0.3)
         new_line = f"  {icon}  {service}"
         printed.append(new_line)
         clear()
-        render_services_scene(printed, pose, position=pos)
+        render_services_scene(printed, guy_pose, gal_pose, position=pos)
         time.sleep(0.9)
 
     # Final frame
@@ -330,9 +363,7 @@ def display_services():
     for c, r in zip(comp_padded, right_padded):
         print(f"  {c:<22}  {r}")
     print()
-    cheer_lines = GUY_CHEER.split("\n")
-    for line in cheer_lines:
-        print("  " + " " * 14 + line)
+    print_duo(GUY_CHEER, GAL_CHEER)
     print("\n  That's what we do. All of it. 💼\n")
     print("-"*58)
     print("  🌐  https://chiefaiadvisors.com")
@@ -394,13 +425,13 @@ def display_seo_spotlight():
     pause("Press Enter to see our AI workflow in action...")
 
 # ----------------------
-# Workflow Screen — one guy with glasses + robot
+# Workflow Screen — duo with glasses + robot
 # ----------------------
 def run_workflow(steps):
     printed = []
-    robot_tick = 0  # starts at 0 = WORK DOWN, first step lifts UP
+    robot_tick = 0
 
-    for i, (step, icon, main_pose) in enumerate(steps, start=1):
+    for i, (step, icon, guy_pose, gal_pose) in enumerate(steps, start=1):
         robot_frame = ROBOT_FRAMES[robot_tick % 2]
         robot_tick += 1
 
@@ -411,13 +442,13 @@ def run_workflow(steps):
         for prev in printed:
             print(prev)
         print()
-        print_guy_and_robot(main_pose, robot_frame)
+        print_duo_and_robot(guy_pose, gal_pose, robot_frame)
         new_line = f"  Step {i:>2}/{len(steps)}: {icon} {step} ✅"
         print(f"\n  >>> Step {i}: {step}")
         printed.append(new_line)
         time.sleep(0.9)
 
-    # Final frame — all steps, guy cheering + robot WORK UP
+    # Final frame — both cheering + robot WORK UP
     clear()
     print("\n" + "="*58)
     print("   🤖  AI-Assisted Workflow Simulation")
@@ -425,7 +456,7 @@ def run_workflow(steps):
     for line in printed:
         print(line)
     print()
-    print_guy_and_robot(GUY_CHEER, ROBOT_WORK_UP)
+    print_duo_and_robot(GUY_CHEER, GAL_CHEER, ROBOT_WORK_UP)
     print("\n  All done. Smooth as butter. 🧈\n")
     print("-"*58)
     print("  All workflow steps executed with AI oversight.")
@@ -460,22 +491,22 @@ def build_clipboard(checked):
     rows.append(r"  |_________| ")
     return rows
 
-def print_guy_and_clipboard(guy_pose, clipboard):
+def print_duo_and_clipboard(guy_pose, gal_pose, clipboard):
     guy_lines = guy_pose.split("\n")
-    while len(guy_lines) < len(clipboard):
-        guy_lines.insert(0, "")
-    col = 18
-    for g, c in zip(guy_lines, clipboard):
-        print(f"  {g:<{col}}{c}")
+    gal_lines = gal_pose.split("\n")
+    h = max(len(guy_lines), len(gal_lines), len(clipboard))
+    while len(guy_lines) < h: guy_lines.insert(0, "")
+    while len(gal_lines) < h: gal_lines.insert(0, "")
+    while len(clipboard)  < h: clipboard.insert(0, "")
+    for a, b, c in zip(guy_lines, gal_lines, clipboard):
+        print(f"  {a:<12}{b:<14}{c}")
 
 def summary(steps):
     total = len(steps)
-    # Tick one box per quarter of steps completed
     quarter = total / CLIPBOARD_ROWS
     checked = 0
 
-    for i, (step, icon, _) in enumerate(steps):
-        # Check if we've crossed into the next quarter
+    for i, (step, icon, _, __) in enumerate(steps):
         new_checked = int(i / quarter) if quarter > 0 else 0
         if new_checked > checked:
             checked = new_checked
@@ -484,20 +515,20 @@ def summary(steps):
         print("\n" + "="*58)
         print("   📋  Workflow Summary")
         print("="*58 + "\n")
-        print_guy_and_clipboard(GUY_RIGHT, build_clipboard(checked))
+        print_duo_and_clipboard(GUY_RIGHT, GAL_LEFT, build_clipboard(checked))
         print()
-        for j, (s, ic, _) in enumerate(steps[:i+1]):
+        for j, (s, ic, _, __) in enumerate(steps[:i+1]):
             print(f"  {j+1:>2}. {ic} {s} ✔")
         time.sleep(0.25)
 
-    # Final frame — all boxes ticked, guy cheering
+    # Final frame — all boxes ticked, both cheering
     clear()
     print("\n" + "="*58)
     print("   📋  Workflow Summary")
     print("="*58 + "\n")
-    print_guy_and_clipboard(GUY_CHEER, build_clipboard(CLIPBOARD_ROWS))
+    print_duo_and_clipboard(GUY_CHEER, GAL_CHEER, build_clipboard(CLIPBOARD_ROWS))
     print()
-    for i, (step, icon, _) in enumerate(steps):
+    for i, (step, icon, _, __) in enumerate(steps):
         print(f"  {i+1:>2}. {icon} {step} ✔")
     print("\n" + "-"*58)
     print(f"  Total steps : {total}")
@@ -547,7 +578,8 @@ def display_contact():
         "",
     ]
     col_speech = 26
-    col_guy    = 18
+    col_guy    = 12
+    col_gal    = 12
 
     def render_contact(phone_frame):
         clear()
@@ -555,11 +587,14 @@ def display_contact():
         print("   📞  Get In Touch With Chief AI Advisors  📞")
         print("="*58 + "\n")
         guy_lines = GUY_RIGHT.split("\n")
-        while len(guy_lines) < len(phone_frame):
-            guy_lines.insert(0, "")
-        sp = speech + [""] * (len(phone_frame) - len(speech))
-        for s, g, p in zip(sp, guy_lines, phone_frame):
-            print(f"  {s:<{col_speech}}{g:<{col_guy}}{p}")
+        gal_lines = GAL_LEFT.split("\n")
+        h = max(len(guy_lines), len(gal_lines), len(phone_frame), len(speech))
+        while len(guy_lines)  < h: guy_lines.insert(0, "")
+        while len(gal_lines)  < h: gal_lines.insert(0, "")
+        sp = speech + [""] * (h - len(speech))
+        pf = phone_frame + [""] * (h - len(phone_frame))
+        for s, g, gl, p in zip(sp, guy_lines, gal_lines, pf):
+            print(f"  {s:<{col_speech}}{g:<{col_guy}}{gl:<{col_gal}}{p}")
         print("\n" + "-"*58)
         print("  🌐  Website  :  https://chiefaiadvisors.com")
         print("  📞  Phone    :  +1-833-313-7714")
@@ -568,14 +603,12 @@ def display_contact():
         print("\n  Tristan Becker | Chief AI Advisors")
         print("  Helping businesses grow with AI — one step at a time. 🚀\n")
 
-    # Ring animation — 4 rings
     for _ in range(4):
         render_contact(PHONE_RING)
         time.sleep(0.4)
         render_contact(PHONE_QUIET)
         time.sleep(0.3)
 
-    # Hold on ringing
     render_contact(PHONE_RING)
     pause("Press Enter — we'll pick up on the first ring ☎️ ...")
 
@@ -590,9 +623,9 @@ if __name__ == "__main__":
     # 2. Intro finger gun teaser
     animate_finger_guns(finger_gun_messages, delay=1.1)
 
-    # Transition — mission statement then Enter
+    # Transition — both together, mission statement then Enter
     clear()
-    print_guy(GUY_ARMS)
+    print_duo(GUY_ARMS, GAL_ARMS)
     print("\n  💼 Chief AI Advisors — Let's get to work!\n")
     print("  " + "─"*54)
     print()
@@ -625,11 +658,13 @@ if __name__ == "__main__":
     # 7. Contact slide
     display_contact()
 
-    # 8. Logo outro
+    # 8. Logo outro — both cheering
     clear()
+    print_duo(GUY_CHEER, GAL_CHEER)
+    print()
     print(ASCII_LOGO)
     print("  " + "─"*44)
-    print("  Tristan Becker & Yvonne Becker | Chief AI Advisors")
+    print("  Tristan Becker | Chief AI Advisors")
     print("  🌐  https://chiefaiadvisors.com")
     print("  📞  +1-833-313-7714")
     print("  📧  chiefaiadvisors@gmail.com")
